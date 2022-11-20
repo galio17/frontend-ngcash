@@ -1,0 +1,3 @@
+interface IIlustrationProps {
+  src: any;
+}

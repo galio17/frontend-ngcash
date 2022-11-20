@@ -1,25 +1,28 @@
 import { ReactNode } from "react";
 
-export interface IUser {
+interface IUser {
   id: string;
   username: string;
   balance: number;
 }
 
-export interface IUserRequest extends Pick<IUser, "username"> {
+interface IUserRequest extends Pick<IUser, "username"> {
   password: string;
 }
 
-export interface ILoginResponse {
+interface ILoginResponse {
   token: string;
 }
 
 type TLoginFunction = (data: IUserRequest) => Promise<string | void>;
 
-export interface IUserContext {
-  loginUser: TLoginFunction;
+type TSignUpFunction = (data: IUserRequest) => Promise<IUser | void>;
+
+interface IUserContext {
+  login: TLoginFunction;
+  signUp: TSignUpFunction;
 }
 
-export interface IUserProviderProps {
+interface IUserProviderProps {
   children: ReactNode;
 }

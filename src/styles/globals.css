@@ -10,12 +10,17 @@
   button {
     @apply flex justify-center items-center;
   }
+
+  button,
+  input {
+    @apply focus:ring focus:ring-grey-2 dark:focus:ring-0;
+  }
 }
 
 @layer components {
   .page {
     @apply min-h-screen w-screen before:bg-light before:dark:bg-dark before:absolute before:-z-10
-        before:bg-scroll before:bg-cover before:bg-left before:w-full before:h-full;
+        before:bg-scroll before:bg-cover before:bg-right before:w-full before:h-full;
   }
 
   .btn {
