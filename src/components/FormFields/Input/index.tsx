@@ -1,12 +1,14 @@
 import { useFormContext } from "react-hook-form";
 
-interface IInputProps {
-  name: string;
-  label: string;
-}
+import { IFields, IInputProps } from "../interfaces";
 
-function Input({ label, name }: IInputProps) {
-  const { register, watch } = useFormContext();
+function Input({ label, name, ...inputProps }: IInputProps) {
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useFormContext<IFields>();
+  const errorMessage = errors[name]?.message;
 
   const isFilled = !!watch(name);
   const focusLabel = isFilled
@@ -24,7 +26,7 @@ function Input({ label, name }: IInputProps) {
       <label
         htmlFor={name}
         className={`
-          ${focusLabel} absolute px-3 group-hover:text-secondary
+          ${focusLabel} absolute pl-3 group-hover:text-secondary
           group-focus-within:text-primary
           group-focus-within:top-0 group-focus-within:translate-y-0
           group-focus-within:text-xs
@@ -33,14 +35,19 @@ function Input({ label, name }: IInputProps) {
         {label}
       </label>
       <input
-        type="text"
         id={name}
+        {...inputProps}
         {...register(name)}
         className="
           outline-none px-3 py-4 w-full h-full 
           bg-grey-0 dark:bg-grey-2
         "
       />
+      {errorMessage && (
+        <span className="text-xs text-alert absolute bottom-0 pl-3">
+          {errorMessage as string}
+        </span>
+      )}
     </div>
   );
 }
