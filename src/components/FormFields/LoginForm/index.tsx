@@ -10,27 +10,27 @@ import Input from "../Input";
 
 function LoginForm() {
   const { loadingToast } = useThemeContext();
-  const { loginUser } = useUserContext();
+  const { login } = useUserContext();
   const router = useRouter();
 
   const onSubmit = async (data: IUserRequest) => {
     const loginToast = loadingToast();
     try {
-      await loginUser(data);
+      await login(data);
       loginToast("Logado com sucesso", "success");
       router.push("/dashboard");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        const { message } = error.response?.data;
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        const { message } = err.response?.data;
         let render = message;
         if (render === "username or password dont match") {
-          render = "username ou senha não correspondem";
+          render = "Username ou senha não correspondem";
         }
 
-        loginToast(render, "error");
+        return loginToast(render, "error");
       }
 
-      loginToast("Erro inesperado", "error");
+      return loginToast("Erro inesperado", "error");
     }
   };
 
