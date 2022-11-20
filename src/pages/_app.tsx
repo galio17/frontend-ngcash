@@ -1,11 +1,14 @@
 import type { AppProps } from "next/app";
-import ThemeProvider from "../providers/themeContext";
+
+import { ThemeProvider, UserProvider } from "../providers";
 import "../styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
-      <Component {...pageProps} />
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </ThemeProvider>
   );
 }
