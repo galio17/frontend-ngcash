@@ -3,14 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply text-grey-2 dark:text-grey-0;
+  }
+
   button {
     @apply flex justify-center items-center;
   }
 }
 
 @layer components {
+  .page {
+    @apply min-h-screen w-screen before:bg-light before:dark:bg-dark before:absolute before:-z-10
+        before:bg-scroll before:bg-cover before:bg-left before:w-full before:h-full;
+  }
+
   .btn {
-    @apply py-[5px] px-[10px] rounded-lg border-2 border-primary hover:border-secondary text-primary hover:text-secondary;
+    @apply py-[5px] px-[10px] rounded-lg border-2 
+      border-primary hover:border-secondary text-primary hover:text-secondary;
   }
 
   .btn-primary {
