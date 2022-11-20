@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  button {
+    @apply flex justify-center items-center;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply py-[5px] px-[10px] rounded-lg border-2 border-primary hover:border-secondary text-primary hover:text-secondary;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary hover:bg-secondary text-grey-0 hover:text-grey-0;
+  }
+}
