@@ -24,13 +24,7 @@ function Input({ label, name, onChange, ...inputProps }: IInputProps) {
   };
 
   return (
-    <div
-      className={`
-        flex rounded-lg overflow-hidden border-2
-        hover:border-secondary focus-within:ring focus-within:ring-primary group relative
-        text-grey-2 dark:text-grey-0 border-grey-2 dark:border-grey-0
-      `}
-    >
+    <div className="input-container group">
       <label
         htmlFor={name}
         className={`
@@ -47,10 +41,7 @@ function Input({ label, name, onChange, ...inputProps }: IInputProps) {
         {...inputProps}
         {...registerProps}
         onChange={handlerChange}
-        className="
-          outline-none px-3 py-4 w-full h-full 
-          bg-grey-0 dark:bg-grey-2
-        "
+        className="outline-none px-3 py-4 w-full h-full bg-[transparent]"
       />
       {errorMessage && (
         <span className="text-xs text-alert absolute bottom-0 pl-3">
