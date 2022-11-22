@@ -7,7 +7,7 @@ import Ilustration from "../../components/Ilustration";
 
 function SignUp() {
   return (
-    <div className="page before:rotate-180 flex flex-col">
+    <div className="page before:rotate-180">
       <Header>
         <Link href="/" className="btn">
           Entrar

@@ -19,8 +19,8 @@
 
 @layer components {
   .page {
-    @apply min-h-screen w-screen before:bg-light before:dark:bg-dark before:absolute before:-z-10
-        before:bg-scroll before:bg-cover before:bg-right before:w-full before:h-full;
+    @apply min-h-screen before:bg-light before:dark:bg-dark before:fixed before:-z-10
+      before:bg-scroll before:bg-cover before:bg-right before:w-full before:h-full flex flex-col;
   }
 
   .btn {
@@ -30,5 +30,14 @@
 
   .btn-primary {
     @apply btn bg-primary hover:bg-secondary text-grey-0 hover:text-grey-0;
+  }
+
+  .form {
+    @apply flex flex-col rounded-lg overflow-hidden h-max
+      border border-grey-2 dark:border-grey-0 bg-grey-0 dark:bg-grey-2;
+  }
+
+  .form__title {
+    @apply py-2 bg-grey-2 dark:bg-grey-0 text-center text-primary text-3xl font-semibold;
   }
 }

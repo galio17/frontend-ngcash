@@ -7,7 +7,7 @@ import Ilustration from "../components/Ilustration";
 
 function Home() {
   return (
-    <div className="page before:bg-right flex flex-col">
+    <div className="page before:bg-right">
       <Header>
         <Link href="/signUp" className="btn">
           Cadastrar-se
