@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
-import { api } from "../../services";
+import { parseCookies, setCookie } from "nookies";
+
 import {
   ILoginResponse,
   IUser,
@@ -16,7 +17,11 @@ function UserProvider({ children }: IUserProviderProps) {
   const login: TLoginFunction = async (userData) => {
     try {
       const { data } = await api.post<ILoginResponse>("/login", userData);
-      localStorage["@ngcash:token"] = data.token;
+      api.defaults.headers["Authorization"] = data.token;
+      setCookie(null, "@ngcash:token", data.token, {
+        maxAge: 60 * 60 * 24,
+        path: "/",
+      });
 
       return data.token;
     } catch (err) {

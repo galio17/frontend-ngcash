@@ -1,3 +1,4 @@
+import { parseCookies, setCookie } from "nookies";
 import { createContext, useEffect, useState } from "react";
 
 import {
@@ -18,11 +19,14 @@ import {
 export const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
 
 function ThemeProvider({ children }: IThemeProviderProps) {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   const changeTheme: TChangeTheme = () => {
     setIsDark(!isDark);
-    localStorage["@ngcash:theme"] = isDark ? "dark" : "light";
+    setCookie(null, "@ngcash:theme", !isDark ? "dark" : "light", {
+      maxAge: 60 * 60 * 24 * 7,
+      path: "/",
+    });
     document.body.classList.toggle("dark");
   };
 
@@ -31,6 +35,8 @@ function ThemeProvider({ children }: IThemeProviderProps) {
     const options: ToastOptions = config ?? {
       isLoading: false,
       autoClose: 3000,
+      closeOnClick: true,
+      draggable: true,
     };
 
     const updateToast = (render: string, type: TypeOptions) => {
@@ -42,8 +48,8 @@ function ThemeProvider({ children }: IThemeProviderProps) {
 
   useEffect(() => {
     if (
-      localStorage["@ngcash:theme"] === "dark" ||
-      (!("@ngcash:theme" in localStorage) &&
+      parseCookies()["@ngcash:theme"] === "dark" ||
+      (!("@ngcash:theme" in parseCookies()) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       document.body.classList.add("dark");
@@ -56,7 +62,11 @@ function ThemeProvider({ children }: IThemeProviderProps) {
 
   return (
     <ThemeContext.Provider value={{ changeTheme, loadingToast, isDark }}>
-      <ToastContainer theme={isDark ? "dark" : "light"} />
+      <ToastContainer
+        theme={isDark ? "dark" : "light"}
+        position="top-center"
+        newestOnTop
+      />
       {children}
     </ThemeContext.Provider>
   );
