@@ -24,12 +24,17 @@
   }
 
   .btn {
-    @apply py-[5px] px-[10px] rounded-lg border-2 
+    @apply py-[5px] px-[10px] rounded-lg border-2 bg-grey-0 dark:bg-grey-2
       border-primary hover:border-secondary text-primary hover:text-secondary;
   }
 
   .btn-primary {
-    @apply btn bg-primary hover:bg-secondary text-grey-0 hover:text-grey-0;
+    @apply btn !bg-primary hover:!bg-secondary text-grey-0 hover:text-grey-0;
+  }
+
+  .btn-filter {
+    @apply btn hover:bg-grey-2 hover:dark:bg-grey-0 state-on:text-grey-0
+    state-on:hover:bg-grey-2 dark:state-on:hover:bg-grey-0;
   }
 
   .form {
@@ -39,5 +44,16 @@
 
   .form__title {
     @apply py-2 bg-grey-2 dark:bg-grey-0 text-center text-primary text-3xl font-semibold;
+  }
+
+  .input-container {
+    @apply flex rounded-lg overflow-hidden border-2
+      hover:border-secondary focus-within:ring focus-within:ring-primary relative
+      text-grey-2 hover:text-secondary focus:text-primary dark:text-grey-0 bg-grey-0 dark:bg-grey-2 border-grey-2 dark:border-grey-0;
+  }
+
+  .card {
+    @apply flex-1 flex sm:flex-initial flex-col rounded-lg border border-primary gap-4 min-w-max
+      bg-grey-0 dark:bg-grey-2 text-grey-2 dark:text-grey-0 p-3 first:min-w-full;
   }
 }

@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   darkMode: "class",
   content: [
@@ -19,5 +21,10 @@ module.exports = {
       alert: "#D63434",
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant("state-on", "&[data-state='on']");
+      addVariant("date-picker", "&::-webkit-calendar-picker-indicator");
+    }),
+  ],
 };
