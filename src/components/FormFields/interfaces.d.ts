@@ -11,8 +11,7 @@ interface IFormProps<TFieldValues extends IFields> {
   className?: string;
 }
 
-interface IInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "id"> {
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
 }
