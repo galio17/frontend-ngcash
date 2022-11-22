@@ -1,0 +1,3 @@
+interface IHeaderProps {
+  children?: ReactNode;
+}

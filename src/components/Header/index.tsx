@@ -1,13 +1,7 @@
-import { ReactNode } from "react";
-
 import Image from "next/image";
 
 import { FaRegLightbulb } from "react-icons/fa";
 import { useThemeContext } from "../../providers";
-
-interface IHeaderProps {
-  children?: ReactNode;
-}
 
 function Header({ children }: IHeaderProps) {
   const { changeTheme, isDark } = useThemeContext();
@@ -15,7 +9,12 @@ function Header({ children }: IHeaderProps) {
   const logo = isDark ? "/logo_ng_cash.gif" : "/logo_ng_cash-light.gif";
 
   return (
-    <header className="shadow-lg px-5 bg-grey-0 dark:bg-grey-2">
+    <header
+      className="
+        shadow-lg px-5 sticky top-0 z-10
+        shadow-[#0005] dark:shadow-[#fff5] bg-grey-0 dark:bg-grey-2
+      "
+    >
       <div className="container flex justify-between items-center mx-auto">
         <figure>
           <Image src={logo} alt="Logo" width={80} height={80} />

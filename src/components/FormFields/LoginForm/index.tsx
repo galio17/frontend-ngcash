@@ -20,30 +20,27 @@ function LoginForm() {
       loginToast("Logado com sucesso", "success");
       router.push("/dashboard");
     } catch (err) {
-      if (err instanceof AxiosError) {
-        const { message } = err.response?.data;
-        let render = message;
-        if (render === "username or password dont match") {
-          render = "Username ou senha não correspondem";
-        }
-
-        return loginToast(render, "error");
+      if (!(err instanceof AxiosError)) {
+        return loginToast("Erro inesperado", "error");
       }
 
-      return loginToast("Erro inesperado", "error");
+      if (!err.response) {
+        return loginToast(err.message, "error");
+      }
+
+      const { message } = err.response.data;
+      let render = message;
+      if (render === "username or password dont match") {
+        render = "Username ou senha não correspondem";
+      }
+
+      return loginToast(render, "error");
     }
   };
 
   return (
-    <main
-      className="
-        flex flex-col rounded-lg overflow-hidden h-max
-        border border-grey-2 dark:border-grey-0 bg-grey-0 dark:bg-grey-2
-      "
-    >
-      <h2 className="py-2 bg-grey-2 dark:bg-grey-0 text-center text-primary text-3xl">
-        Login
-      </h2>
+    <main className="form">
+      <h2 className="form__title">Login</h2>
       <Form
         schema={loginSchema}
         onSubmit={onSubmit}
